@@ -11,7 +11,11 @@ BOT_NAME = "restaurentscraper"
 
 SPIDER_MODULES = ["restaurentscraper.spiders"]
 NEWSPIDER_MODULE = "restaurentscraper.spiders"
+SCRAPEOPS_API_KEY = '8b570a1a-5b2b-4e21-a892-5b8f5a326cbe'
 
+EXTENSIONS = {
+  'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "restaurentscraper (+http://www.yourdomain.com)"
@@ -47,7 +51,10 @@ ROBOTSTXT_OBEY = False
 #SPIDER_MIDDLEWARES = {
 #    "restaurentscraper.middlewares.RestaurentscraperSpiderMiddleware": 543,
 #}
-
+DOWNLOADER_MIDDLEWARES = { 
+  'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550, 
+  'scrapy.downloadermiddlewares.retry.RetryMiddleware': None, 
+}
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
